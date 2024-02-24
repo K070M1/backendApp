@@ -12,8 +12,8 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import jakarta.validation.constraints.NotNull;
 
-@Document("documentType")
-public class DocumentType {
+@Document("sexType")
+public class SexType {
 	@Id
 	private String _id;
 	
@@ -33,21 +33,21 @@ public class DocumentType {
 	@Field("updated_at")
 	private LocalDateTime updatedAt;
 	
-	public DocumentType() {
+	public SexType() {
 		if(this.cod == null) {
 			this.cod = UUID.randomUUID().toString().replace("-", "").toUpperCase();			
 		}
 	}
 
-	public DocumentType(String _id, String name, String cod, LocalDateTime createdAt, LocalDateTime updatedAt,
-			@NotNull StateType stateType_id) {
+	public SexType(String _id, String name, String cod, @NotNull StateType stateType_id, LocalDateTime createdAt,
+			LocalDateTime updatedAt) {
 		super();
 		this._id = _id;
 		this.name = name;
 		this.cod = cod;
+		this.stateType_id = stateType_id;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
-		this.stateType_id = stateType_id;
 	}
 
 	public String get_id() {
@@ -74,6 +74,14 @@ public class DocumentType {
 		this.cod = cod;
 	}
 
+	public StateType getStateType_id() {
+		return stateType_id;
+	}
+
+	public void setStateType_id(StateType stateType_id) {
+		this.stateType_id = stateType_id;
+	}
+
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -90,21 +98,9 @@ public class DocumentType {
 		this.updatedAt = updatedAt;
 	}
 
-	public StateType getStateType_id() {
-		return stateType_id;
-	}
-
-	public void setStateType_id(StateType stateType_id) {
-		this.stateType_id = stateType_id;
-	}
-
 	@Override
 	public String toString() {
-		return "DocumentType [_id=" + _id + ", name=" + name + ", cod=" + cod + ", stateType_id=" + stateType_id
+		return "SexType [_id=" + _id + ", name=" + name + ", cod=" + cod + ", stateType_id=" + stateType_id
 				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
-	
-	
-	
-	
 }

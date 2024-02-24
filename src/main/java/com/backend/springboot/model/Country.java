@@ -12,14 +12,13 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import jakarta.validation.constraints.NotNull;
 
-@Document("documentType")
-public class DocumentType {
+@Document("country")
+public class Country {
 	@Id
 	private String _id;
-	
 	private String name;
-	
 	private String cod;
+	private String codCountry;
 	
 	@NotNull
 	@DBRef
@@ -33,18 +32,19 @@ public class DocumentType {
 	@Field("updated_at")
 	private LocalDateTime updatedAt;
 	
-	public DocumentType() {
+	public Country() {
 		if(this.cod == null) {
 			this.cod = UUID.randomUUID().toString().replace("-", "").toUpperCase();			
 		}
 	}
 
-	public DocumentType(String _id, String name, String cod, LocalDateTime createdAt, LocalDateTime updatedAt,
-			@NotNull StateType stateType_id) {
+	public Country(String _id, String name, String cod, String codCountry, LocalDateTime createdAt,
+			LocalDateTime updatedAt, @NotNull StateType stateType_id) {
 		super();
 		this._id = _id;
 		this.name = name;
 		this.cod = cod;
+		this.codCountry = codCountry;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
 		this.stateType_id = stateType_id;
@@ -74,6 +74,14 @@ public class DocumentType {
 		this.cod = cod;
 	}
 
+	public String getCodCountry() {
+		return codCountry;
+	}
+
+	public void setCodCountry(String codCountry) {
+		this.codCountry = codCountry;
+	}
+
 	public LocalDateTime getCreatedAt() {
 		return createdAt;
 	}
@@ -100,11 +108,8 @@ public class DocumentType {
 
 	@Override
 	public String toString() {
-		return "DocumentType [_id=" + _id + ", name=" + name + ", cod=" + cod + ", stateType_id=" + stateType_id
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+		return "Country [_id=" + _id + ", name=" + name + ", cod=" + cod + ", codCountry=" + codCountry
+				+ ", stateType_id=" + stateType_id + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
-	
-	
-	
 	
 }
